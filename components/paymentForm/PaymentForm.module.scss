@@ -1,0 +1,17 @@
+@import 'styles/colors.module';
+@import 'styles/fonts.module';
+@import 'styles/variables.module';
+@import 'styles/mixins';
+
+.container {
+    @include flex_center();
+    width: 100%;
+    flex-direction: column;
+    border: black 1px solid;
+    padding: 10px;
+
+    & > h3 {
+        @include text($openSans, 700, $mediumFontSize, $primary-color);
+        margin-bottom: 20px;
+    }
+}

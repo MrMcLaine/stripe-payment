@@ -1,0 +1,12 @@
+@mixin text($ff, $fw, $fs, $c) {
+    font-family: $ff;
+    font-weight: $fw;
+    font-size: $fs;
+    color: $c;
+}
+
+@mixin flex_center() {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

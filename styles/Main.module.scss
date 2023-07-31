@@ -1,0 +1,15 @@
+@import 'variables.module.scss';
+@import 'styles/mixins';
+@import 'styles/fonts.module';
+@import 'styles/colors.module';
+
+.container {
+    @include flex_center();
+    flex-direction: column;
+    border: black 1px solid;
+    padding: 10px;
+    & > h1 {
+        @include text($openSans, 700, $largeFontSize, $text-primary);
+        margin-bottom: 20px;
+    }
+}
