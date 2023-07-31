@@ -1,0 +1,11 @@
+@import 'styles/colors.module';
+@import 'styles/fonts.module';
+@import 'styles/variables.module';
+@import 'styles/mixins';
+
+.container {
+    @include flex_center();
+    width: 100%;
+    flex-direction: column;
+    padding: 10px;
+}

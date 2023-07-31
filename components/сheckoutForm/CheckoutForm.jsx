@@ -1,5 +1,6 @@
 import React from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import Button from '@/components/button/Button';
 import styles from './CheckoutForm.module.scss';
 
 const CheckoutForm = () => {
@@ -30,9 +31,9 @@ const CheckoutForm = () => {
     return (
         <form onSubmit={handleSubmit} className={styles.form}>
             <CardElement className={styles.cardElement} />
-            <button type="submit" disabled={!stripe} className={styles.button}>
+            <Button type="submit" disabled={!stripe}>
                 <h3>Pay</h3>
-            </button>
+            </Button>
         </form>
     );
 };

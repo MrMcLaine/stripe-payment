@@ -1,0 +1,22 @@
+@import 'styles/colors.module';
+
+.button {
+    display: block;
+    width: 400px;
+    padding: 10px 15px;
+    background-color: $background-secondary;
+    color: $button-primary;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $primary-color-hover;
+        color: $button-primary-hover;
+    }
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+}
