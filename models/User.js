@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema({
     },
     stripeCustomerId: {
         type: String,
-        default: null,
+        required: true,
     },
     subscriptionId: {
         type: String,

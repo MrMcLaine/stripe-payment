@@ -4,13 +4,15 @@ const dotenv = require('dotenv');
 const userRoutes = require('./routes/userRoutes');
 const connectDB = require('./lib/mongo');
 
-dotenv.config();
+
 
 const dev = process.env.NODE_ENV !== 'production';
 const nextApp = next({ dev });
 const handle = nextApp.getRequestHandler();
 
 nextApp.prepare().then(() => {
+
+    dotenv.config();
     connectDB();
     const app = express();
 
