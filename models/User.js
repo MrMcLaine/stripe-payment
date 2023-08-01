@@ -17,10 +17,11 @@ const userSchema = new mongoose.Schema({
     },
     stripeCustomerId: {
         type: String,
-        required: true,
+        default: null,
     },
     subscriptionId: {
         type: String,
+        default: null,
     },
 });
 
@@ -37,4 +38,4 @@ userSchema.pre('save', async function (next) {
     }
 });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('payment_user', userSchema);
