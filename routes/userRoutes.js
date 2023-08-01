@@ -33,6 +33,26 @@ router.post('/', async (req, res) => {
     }
 });
 
+router.post('/login', async (req, res) => {
+    try {
+        const user = await userService.loginUser(
+            req.body.email,
+            req.body.password
+        );
+        res.json({
+            status: 'success',
+            message: 'Login successful',
+            user: user,
+        });
+    } catch (error) {
+        res.status(400).json({
+            status: 'error',
+            message: 'Login failed',
+            error: error.message,
+        });
+    }
+});
+
 router.get('/:id', async (req, res) => {
     try {
         const user = await userService.getUserById(req.params.id);
@@ -79,26 +99,6 @@ router.delete('/:id', async (req, res) => {
         res.status(400).json({
             status: 'error',
             message: 'Failed to delete user',
-            error: error.message,
-        });
-    }
-});
-
-router.post('/login', async (req, res) => {
-    try {
-        const user = await userService.loginUser(
-            req.body.email,
-            req.body.password
-        );
-        res.json({
-            status: 'success',
-            message: 'Login successful',
-            user: user,
-        });
-    } catch (error) {
-        res.status(400).json({
-            status: 'error',
-            message: 'Login failed',
             error: error.message,
         });
     }

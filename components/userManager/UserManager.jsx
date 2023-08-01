@@ -14,6 +14,7 @@ export default function UserManager({ user, setUser, setError }) {
         try {
             const res = await axios.post('/user/login', credentials);
             setUser(res.data.user);
+            localStorage.setItem('user', JSON.stringify(res.data.user));
             setError(null);
             setSuccessMessage('Successfully logged in!');
             setIsFormVisible(false);
@@ -38,9 +39,22 @@ export default function UserManager({ user, setUser, setError }) {
         }
     };
 
+    const handleLogout = () => {
+        localStorage.removeItem('user');
+        setUser(null);
+        setIsFormVisible(true);
+        setSuccessMessage(null);
+    };
+
     return (
         <>
-            {user && <h2>Welcome, {user.name}!</h2>} {}
+            {user && (
+                <div>
+                    <h2>Welcome, {user.name}!</h2>
+                    <Button onClick={handleLogout}>Logout</Button>
+                </div>
+            )}
+            {/* ... */}
             <div className={styles.container}>
                 {isFormVisible && (
                     <>
