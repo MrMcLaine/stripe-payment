@@ -1,0 +1,13 @@
+@import 'styles/colors.module';
+@import 'styles/colors.module';
+
+.container {
+    border: $secondary-color 1px solid;
+    width: 100%;
+    padding-bottom: 10px;
+    & > button {
+        width: 200px;
+        margin: 0 auto;
+        background-color: $background-button-secondary;
+    }
+}

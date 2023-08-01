@@ -1,0 +1,8 @@
+@import 'styles/colors.module';
+@import 'styles/fonts.module';
+@import 'styles/variables.module';
+@import 'styles/mixins';
+
+.formContainer {
+    @include form-container();
+}

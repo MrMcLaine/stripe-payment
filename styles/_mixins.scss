@@ -1,3 +1,7 @@
+@import 'styles/colors.module';
+@import 'styles/fonts.module';
+@import 'styles/variables.module';
+
 @mixin text($ff, $fw, $fs, $c) {
     font-family: $ff;
     font-weight: $fw;
@@ -9,4 +13,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+@mixin form-container() {
+    @include flex_center();
+    width: 100%;
+    flex-direction: column;
+    padding: 10px;
+
+    & > h3 {
+        @include text($openSans, 700, $mediumFontSize, $primary-color);
+        margin-bottom: 20px;
+    }
 }
