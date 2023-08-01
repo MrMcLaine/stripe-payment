@@ -1,8 +1,5 @@
-const connectDB = require('../lib/mongo');
 const User = require('../models/User');
 const { comparePasswords } = require('../utils/passwordUtils');
-
-connectDB();
 
 const userService = {
     createUser: async (
@@ -22,6 +19,7 @@ const userService = {
                 subscriptionId,
             });
         } catch (error) {
+            console.log(error);
             throw new Error('Failed to create a user');
         }
     },
@@ -46,6 +44,7 @@ const userService = {
 
     deleteUser: async id => {
         try {
+
             return await User.findByIdAndDelete(id);
         } catch (error) {
             throw new Error('Failed to delete user');
