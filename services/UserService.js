@@ -1,5 +1,6 @@
 import connectDB from '@/lib/mongo';
 import User from '@/models/User';
+import { comparePasswords } from '@/utils/passwordUtils';
 
 connectDB();
 
@@ -49,6 +50,29 @@ const userService = {
             return await User.findByIdAndDelete(id);
         } catch (error) {
             throw new Error('Failed to delete user');
+        }
+    },
+
+    loginUser: async (email, password) => {
+        try {
+            const user = await User.findOne({ email });
+
+            if (!user) {
+                throw new Error('Invalid email or password');
+            }
+
+            const isValidPassword = await comparePasswords(
+                password,
+                user.password
+            );
+
+            if (!isValidPassword) {
+                throw new Error('Invalid email or password');
+            }
+
+            return user;
+        } catch (error) {
+            throw new Error('Failed to login user');
         }
     },
 };

@@ -40,6 +40,18 @@ nextApp.prepare().then(() => {
         res.json(user);
     });
 
+    app.post('/login', async (req, res) => {
+        try {
+            const user = await userService.loginUser(
+                req.body.email,
+                req.body.password
+            );
+            res.json(user);
+        } catch (error) {
+            res.status(400).json({ message: error.message });
+        }
+    });
+
     app.get('*', (req, res) => {
         return handle(req, res); // for all the React routing
     });
