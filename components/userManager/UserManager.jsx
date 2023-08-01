@@ -7,35 +7,42 @@ import styles from './UserManager.module.scss';
 
 export default function UserManager({ user, setUser, setError }) {
     const [isLoginFormVisible, setLoginFormVisible] = useState(true);
+    const [successMessage, setSuccessMessage] = useState(null);
+    const [isFormVisible, setIsFormVisible] = useState(true);
 
     const handleLogin = async credentials => {
         try {
             const res = await axios.post('/user/login', credentials);
             setUser(res.data.user);
             setError(null);
+            setSuccessMessage('Successfully logged in!');
+            setIsFormVisible(false);
         } catch (err) {
             console.error(err);
             setError(err.response.data.message);
+            setSuccessMessage(null);
         }
     };
 
-    const handleRegister = async data => {
+    const handleRegister = async user => {
         try {
-            const res = await axios.post('/user/', data);
+            const res = await axios.post('/user/', user);
             setUser(res.data.user);
             setError(null);
+            setSuccessMessage('Successfully registered! Please log in.');
             setLoginFormVisible(true);
         } catch (err) {
             console.error(err);
             setError(err.response.data.message);
+            setSuccessMessage(null);
         }
     };
 
     return (
         <>
-            {user && <h2>Welcome, {user.name}!</h2>} {/* Display greeting if user exists */}
+            {user && <h2>Welcome, {user.name}!</h2>} {}
             <div className={styles.container}>
-                {!user && (
+                {isFormVisible && (
                     <>
                         {isLoginFormVisible ? (
                             <LoginForm onLogin={handleLogin} />
@@ -51,6 +58,7 @@ export default function UserManager({ user, setUser, setError }) {
                         </Button>
                     </>
                 )}
+                {successMessage && <p>{successMessage}</p>}
             </div>
         </>
     );

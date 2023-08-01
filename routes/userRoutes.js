@@ -14,7 +14,7 @@ router.post('/', async (req, res) => {
         res.json({
             status: 'success',
             message: 'User successfully created',
-            data: user,
+            user: user,
         });
     } catch (error) {
         res.status(400).json({
@@ -31,7 +31,7 @@ router.get('/:id', async (req, res) => {
         res.json({
             status: "success",
             message: "User data fetched successfully",
-            data: user
+            user: user
         });
     } catch (error) {
         res.status(400).json({
@@ -48,7 +48,7 @@ router.put('/:id', async (req, res) => {
         res.json({
             status: "success",
             message: "User data updated successfully",
-            data: user
+            user: user
         });
     } catch (error) {
         res.status(400).json({
@@ -65,7 +65,7 @@ router.delete('/:id', async (req, res) => {
         res.json({
             status: "success",
             message: "User successfully deleted",
-            data: user
+            user: user
         });
     } catch (error) {
         res.status(400).json({
@@ -85,7 +85,7 @@ router.post('/login', async (req, res) => {
         res.json({
             status: "success",
             message: "Login successful",
-            data: user
+            user: user
         });
     } catch (error) {
         res.status(400).json({
