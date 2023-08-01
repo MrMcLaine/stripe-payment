@@ -1,6 +1,6 @@
-import connectDB from '@/lib/mongo';
-import User from '@/models/User';
-import { comparePasswords } from '@/utils/passwordUtils';
+const connectDB = require('../lib/mongo');
+const User = require('../models/User');
+const { comparePasswords } = require('../utils/passwordUtils');
 
 connectDB();
 
@@ -46,7 +46,6 @@ const userService = {
 
     deleteUser: async id => {
         try {
-
             return await User.findByIdAndDelete(id);
         } catch (error) {
             throw new Error('Failed to delete user');
@@ -77,4 +76,4 @@ const userService = {
     },
 };
 
-export default userService;
+module.exports = userService;
