@@ -1,0 +1,99 @@
+const express = require('express');
+const router = express.Router();
+const userService = require('../services/UserService');
+
+router.post('/', async (req, res) => {
+    try {
+        const user = await userService.createUser(
+            req.body.name,
+            req.body.email,
+            req.body.password,
+            req.body.stripeCustomerId,
+            req.body.subscriptionId
+        );
+        res.json({
+            status: 'success',
+            message: 'User successfully created',
+            data: user,
+        });
+    } catch (error) {
+        res.status(400).json({
+            status: 'error',
+            message: 'User creation failed',
+            error: error.message,
+        });
+    }
+});
+
+router.get('/:id', async (req, res) => {
+    try {
+        const user = await userService.getUserById(req.params.id);
+        res.json({
+            status: "success",
+            message: "User data fetched successfully",
+            data: user
+        });
+    } catch (error) {
+        res.status(400).json({
+            status: "error",
+            message: "Failed to fetch user data",
+            error: error.message
+        });
+    }
+});
+
+router.put('/:id', async (req, res) => {
+    try {
+        const user = await userService.updateUser(req.params.id, req.body);
+        res.json({
+            status: "success",
+            message: "User data updated successfully",
+            data: user
+        });
+    } catch (error) {
+        res.status(400).json({
+            status: "error",
+            message: "Failed to update user data",
+            error: error.message
+        });
+    }
+});
+
+router.delete('/:id', async (req, res) => {
+    try {
+        const user = await userService.deleteUser(req.params.id);
+        res.json({
+            status: "success",
+            message: "User successfully deleted",
+            data: user
+        });
+    } catch (error) {
+        res.status(400).json({
+            status: "error",
+            message: "Failed to delete user",
+            error: error.message
+        });
+    }
+});
+
+router.post('/login', async (req, res) => {
+    try {
+        const user = await userService.loginUser(
+            req.body.email,
+            req.body.password
+        );
+        res.json({
+            status: "success",
+            message: "Login successful",
+            data: user
+        });
+    } catch (error) {
+        res.status(400).json({
+            status: "error",
+            message: "Login failed",
+            error: error.message
+        });
+    }
+});
+
+module.exports = router;
