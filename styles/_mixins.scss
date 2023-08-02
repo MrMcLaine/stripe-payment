@@ -26,3 +26,23 @@
         margin-bottom: 20px;
     }
 }
+
+@mixin form-element() {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+@mixin card-element() {
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border: 1px solid $background-card;
+    border-radius: 4px;
+}

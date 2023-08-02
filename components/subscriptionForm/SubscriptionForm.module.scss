@@ -3,6 +3,10 @@
 @import 'styles/variables.module';
 @import 'styles/mixins';
 
+.container {
+    @include form-container();
+}
+
 .form {
     @include form-element();
 
