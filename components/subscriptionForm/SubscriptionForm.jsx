@@ -10,9 +10,9 @@ const SubscriptionForm = () => {
     const elements = useElements();
 
     const subscriptionOptions = {
-        basic: 100,
-        standard: 200,
-        premium: 300,
+        basic: 1,
+        standard: 2,
+        premium: 3,
     };
 
     const [subscriptionPlan, setSubscriptionPlan] = useState('basic');
@@ -38,7 +38,10 @@ const SubscriptionForm = () => {
             console.log('[PaymentMethod]', paymentMethod);
 
             try {
-                const response = await axios.post('/subscriptions/create', {
+                const user = JSON.parse(localStorage.getItem('user'));
+                console.log('User on front in subscription form: ', user);
+                const response = await axios.post('/subscription/create', {
+                    user: user._id,
                     plan: subscriptionPlan,
                     price: price * 100,
                     paymentMethodId: paymentMethod.id,
