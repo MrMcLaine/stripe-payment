@@ -5,6 +5,7 @@ const userService = require('../services/UserService');
 router.post('/', async (req, res) => {
     try {
         const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+
         let stripeCustomer = await stripe.customers.create({
             email: req.body.email,
             description: req.body.name,

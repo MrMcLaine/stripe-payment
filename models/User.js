@@ -19,10 +19,12 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    subscriptionId: {
-        type: String,
-        default: null,
-    },
+    subscriptions: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Subscription',
+        },
+    ],
 });
 
 userSchema.pre('save', async function (next) {

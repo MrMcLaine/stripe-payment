@@ -35,9 +35,17 @@ const userService = {
 
     updateUser: async (id, data) => {
         try {
+            const updatedUser = await User.findByIdAndUpdate(id, data, {
+                new: true,
+            });
+            if (!updatedUser) {
+                console.error('User update failed, user not found');
+                throw new Error('Failed to update user');
+            }
 
-            return await User.findByIdAndUpdate(id, data, { new: true });
+            return updatedUser;
         } catch (error) {
+            console.error('User update failed', error);
             throw new Error('Failed to update user');
         }
     },

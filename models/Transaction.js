@@ -11,7 +11,7 @@ const Transaction = new mongoose.Schema(
             required: true,
         },
         paymentMethodId: {
-            type: String
+            type: String,
         },
         amount: {
             type: Number,
@@ -26,7 +26,7 @@ const Transaction = new mongoose.Schema(
         type: {
             type: String,
             required: true,
-            enum: ['charge', 'refund'],
+            enum: ['charge', 'refund', 'subscription'],
         },
     },
     {
