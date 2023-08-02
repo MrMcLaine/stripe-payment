@@ -2,6 +2,7 @@ const express = require('express');
 const next = require('next');
 const dotenv = require('dotenv');
 const userRoutes = require('./routes/userRoutes');
+const transactionRoutes = require('./routes/transactionRoutes');
 const connectDB = require('./lib/mongo');
 
 
@@ -19,9 +20,10 @@ nextApp.prepare().then(() => {
     app.use(express.json());
 
     app.use('/user', userRoutes);
+    app.use('/transaction', transactionRoutes);
 
     app.get('*', (req, res) => {
-        return handle(req, res); // for all the React routing
+        return handle(req, res);
     });
 
     app.listen(3000, err => {

@@ -10,8 +10,6 @@ router.post('/', async (req, res) => {
             description: req.body.name,
         });
 
-        console.log('stripeCustomer', stripeCustomer);
-
         const user = await userService.createUser(
             req.body.name,
             req.body.email,
@@ -19,10 +17,14 @@ router.post('/', async (req, res) => {
             stripeCustomer.id,
             req.body.subscriptionId
         );
+
         res.json({
             status: 'success',
             message: 'User successfully created',
-            user: user,
+            user: {
+                _id: user._id,
+                name: user.name,
+            },
         });
     } catch (error) {
         res.status(400).json({
@@ -39,10 +41,14 @@ router.post('/login', async (req, res) => {
             req.body.email,
             req.body.password
         );
+
         res.json({
             status: 'success',
             message: 'Login successful',
-            user: user,
+            user: {
+                _id: user._id,
+                name: user.name,
+            },
         });
     } catch (error) {
         res.status(400).json({
@@ -56,6 +62,7 @@ router.post('/login', async (req, res) => {
 router.get('/:id', async (req, res) => {
     try {
         const user = await userService.getUserById(req.params.id);
+
         res.json({
             status: 'success',
             message: 'User data fetched successfully',
@@ -73,6 +80,7 @@ router.get('/:id', async (req, res) => {
 router.put('/:id', async (req, res) => {
     try {
         const user = await userService.updateUser(req.params.id, req.body);
+
         res.json({
             status: 'success',
             message: 'User data updated successfully',
@@ -90,6 +98,7 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
     try {
         const user = await userService.deleteUser(req.params.id);
+
         res.json({
             status: 'success',
             message: 'User successfully deleted',
