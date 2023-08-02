@@ -11,8 +11,7 @@ const Transaction = new mongoose.Schema(
             required: true,
         },
         paymentMethodId: {
-            type: String,
-            required: true,
+            type: String
         },
         amount: {
             type: Number,
