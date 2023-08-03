@@ -13,9 +13,10 @@ const CheckoutForm = () => {
     const handleSubmit = async event => {
         event.preventDefault();
 
-        const user = JSON.parse(localStorage.getItem('user'));
+        const token = localStorage.getItem('token');
 
         if (!stripe || !elements) {
+
             return;
         }
 
@@ -35,9 +36,13 @@ const CheckoutForm = () => {
                 const response = await axios.post(
                     '/transaction/create-payment-intent',
                     {
-                        user: user,
                         paymentMethodId: paymentMethod.id,
                         amount: amount * 100,
+                    },
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
                     }
                 );
                 console.log(response.data);

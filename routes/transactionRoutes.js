@@ -5,7 +5,7 @@ const transactionService = require('../services/TransactionService');
 router.post('/create-payment-intent', async (req, res) => {
     try {
         const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-        const { amount, user } = req.body;
+        const { amount } = req.body;
 
         const paymentIntent = await stripe.paymentIntents.create({
             amount,
@@ -18,7 +18,7 @@ router.post('/create-payment-intent', async (req, res) => {
         );
 
         const transaction = await transactionService.createPaymentIntent(
-            user._id,
+            req.user._id,
             confirmedPaymentIntent.id,
             confirmedPaymentIntent.payment_method,
             confirmedPaymentIntent.amount,
@@ -46,7 +46,7 @@ router.post('/create-payment-intent', async (req, res) => {
 router.post('/createRefund', async (req, res) => {
     try {
         const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-        const { user, paymentIntentId } = req.body;
+        const { paymentIntentId } = req.body;
 
         const refund = await stripe.refunds.create({
             payment_intent: paymentIntentId,
@@ -55,7 +55,7 @@ router.post('/createRefund', async (req, res) => {
         console.log('Refund: ', refund);
 
         const transaction = await transactionService.createRefund(
-            user._id,
+            req.user._id,
             paymentIntentId,
             '',
             refund.amount,

@@ -10,14 +10,18 @@ const RefundButton = () => {
 
     const onClick = async () => {
         try {
-            const user = JSON.parse(localStorage.getItem('user'));
-            console.log('Starting Refund Button...');
-            console.log('User on frontend: ', user);
-            console.log('Payment Intent ID on frontend: ', paymentIntentId);
-            const response = await axios.post('/transaction/createRefund', {
-                user,
-                paymentIntentId,
-            });
+            const token = localStorage.getItem('token');
+            const response = await axios.post(
+                '/transaction/createRefund',
+                {
+                    paymentIntentId,
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
 
             if (response.status === 200) {
                 alert(
