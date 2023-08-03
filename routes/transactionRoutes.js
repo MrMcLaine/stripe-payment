@@ -18,7 +18,7 @@ router.post('/create-payment-intent', async (req, res) => {
         );
 
         const transaction = await transactionService.createPaymentIntent(
-            req.user._id,
+            req.user.id,
             confirmedPaymentIntent.id,
             confirmedPaymentIntent.payment_method,
             confirmedPaymentIntent.amount,
@@ -55,7 +55,7 @@ router.post('/createRefund', async (req, res) => {
         console.log('Refund: ', refund);
 
         const transaction = await transactionService.createRefund(
-            req.user._id,
+            req.user.id,
             paymentIntentId,
             '',
             refund.amount,
