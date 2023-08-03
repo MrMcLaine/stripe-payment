@@ -55,6 +55,7 @@ const CheckoutForm = () => {
     return (
         <form onSubmit={handleSubmit} className={styles.form}>
             <InputField
+                width={350}
                 type="number"
                 value={amount}
                 onChange={e => setAmount(e.target.value)}

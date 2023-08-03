@@ -1,10 +1,15 @@
 @import 'styles/colors.module';
 @import 'styles/colors.module';
+@import "styles/mixins";
 
 .container {
-    border: $secondary-color 1px solid;
+    @include flex_center();
     width: 100%;
     padding-bottom: 10px;
+
+}
+
+.formWithButton{
     & > button {
         width: 200px;
         margin: 0 auto;

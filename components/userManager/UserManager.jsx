@@ -58,18 +58,22 @@ export default function UserManager({ user, setUser, setError }) {
             <div className={styles.container}>
                 {isFormVisible && (
                     <>
-                        {isLoginFormVisible ? (
-                            <LoginForm onLogin={handleLogin} />
-                        ) : (
-                            <RegisterForm onRegister={handleRegister} />
-                        )}
-                        <Button
-                            onClick={() => setLoginFormVisible(!isLoginFormVisible)}
-                        >
-                            {isLoginFormVisible
-                                ? 'Switch to Register'
-                                : 'Switch to Login'}
-                        </Button>
+                        <div className={styles.formWithButton}>
+                            {isLoginFormVisible ? (
+                                <LoginForm onLogin={handleLogin} />
+                            ) : (
+                                <RegisterForm onRegister={handleRegister} />
+                            )}
+                            <Button
+                                onClick={() =>
+                                    setLoginFormVisible(!isLoginFormVisible)
+                                }
+                            >
+                                {isLoginFormVisible
+                                    ? 'Switch to Register'
+                                    : 'Switch to Login'}
+                            </Button>
+                        </div>
                     </>
                 )}
                 {successMessage && <p>{successMessage}</p>}

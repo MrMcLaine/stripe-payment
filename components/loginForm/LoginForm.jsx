@@ -15,12 +15,14 @@ const LoginForm = ({ onLogin }) => {
     return (
         <form onSubmit={handleSubmit} className={styles.formContainer}>
             <InputField
+                width={400}
                 type="email"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
                 label="Email"
             />
             <InputField
+                width={400}
                 type="password"
                 value={password}
                 onChange={e => setPassword(e.target.value)}

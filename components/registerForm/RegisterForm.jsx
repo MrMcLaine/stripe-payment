@@ -16,18 +16,21 @@ const RegisterForm = ({ onRegister }) => {
     return (
         <form onSubmit={handleSubmit} className={styles.formContainer}>
             <InputField
+                width={400}
                 type="text"
                 value={name}
                 onChange={e => setName(e.target.value)}
                 label="Name"
             />
             <InputField
+                width={400}
                 type="email"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
                 label="Email"
             />
             <InputField
+                width={400}
                 type="password"
                 value={password}
                 onChange={e => setPassword(e.target.value)}

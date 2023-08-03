@@ -46,3 +46,9 @@
     border: 1px solid $background-card;
     border-radius: 4px;
 }
+
+@mixin input-focus() {
+    outline: none;
+    border-color: $button-primary;
+    box-shadow: 0 0 10px $button-primary;
+}

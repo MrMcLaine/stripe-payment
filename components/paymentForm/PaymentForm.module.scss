@@ -5,9 +5,8 @@
 
 .container {
     @include flex_center();
-    width: 100%;
+    width: $formWidth;;
     flex-direction: column;
-    border: black 1px solid;
     padding: 10px;
 
     & > h3 {

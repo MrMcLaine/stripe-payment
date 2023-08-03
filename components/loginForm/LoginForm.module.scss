@@ -5,4 +5,5 @@
 
 .formContainer {
     @include form-container();
+    width: $formWidth;
 }
