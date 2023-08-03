@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userService = require('../services/UserService');
+const authService = require('../services/AuthService');
 
 router.post('/', async (req, res) => {
     try {
@@ -43,13 +44,15 @@ router.post('/login', async (req, res) => {
             req.body.password
         );
 
+        const token = authService.generateToken(user._id, user.name);
+
         res.json({
             status: 'success',
             message: 'Login successful',
             user: {
-                _id: user._id,
                 name: user.name,
             },
+            token,
         });
     } catch (error) {
         res.status(400).json({

@@ -6,6 +6,7 @@ const transactionRoutes = require('./routes/transactionRoutes');
 const subscriptionRoutes = require('./routes/substriptionRoutes');
 const connectDB = require('./lib/mongo');
 const createPlans = require('./lib/setup');
+const authMiddleware = require('./middleware/authMiddleware');
 
 const dev = process.env.NODE_ENV !== 'production';
 const nextApp = next({ dev });
@@ -19,6 +20,7 @@ nextApp.prepare().then(() => {
     const app = express();
 
     app.use(express.json());
+    app.use(authMiddleware);
 
     app.use('/user', userRoutes);
     app.use('/transaction', transactionRoutes);
