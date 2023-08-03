@@ -11,6 +11,13 @@ module.exports = (req, res, next) => {
     if (authHeader) {
         const token = authHeader.split(' ')[1];
         req.user = authService.getDataFromToken(token);
+        if (!req.user) {
+            res.status(401).json({
+                status: 'error',
+                message: 'Invalid token',
+            });
+            return;
+        }
     }
     next();
 };

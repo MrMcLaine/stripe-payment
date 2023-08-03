@@ -22,6 +22,7 @@ const SubscriptionForm = () => {
         event.preventDefault();
 
         if (!stripe || !elements) {
+
             return;
         }
 
@@ -38,14 +39,20 @@ const SubscriptionForm = () => {
             console.log('[PaymentMethod]', paymentMethod);
 
             try {
-                const user = JSON.parse(localStorage.getItem('user'));
-                console.log('User on front in subscription form: ', user);
-                const response = await axios.post('/subscription/create', {
-                    user: user._id,
-                    plan: subscriptionPlan,
-                    price: price * 100,
-                    paymentMethodId: paymentMethod.id,
-                });
+                const token = localStorage.getItem('token');
+                const response = await axios.post(
+                    '/subscription/create',
+                    {
+                        plan: subscriptionPlan,
+                        price: price * 100,
+                        paymentMethodId: paymentMethod.id,
+                    },
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
                 console.log(response.data);
             } catch (err) {
                 console.log(err);

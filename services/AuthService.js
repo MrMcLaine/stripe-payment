@@ -7,27 +7,14 @@ class AuthService {
         return jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' });
     }
 
-    verifyToken(token) {
+    getDataFromToken(token) {
         try {
-
-            return jwt.verify(token, process.env.JWT_SECRET);
+            const decoded = jwt.verify(token, process.env.JWT_SECRET);
+            return { id: decoded.id, name: decoded.name };
         } catch (err) {
-
+            console.log('Error decoding token: ', err);
             return null;
         }
-    }
-
-    getDataFromToken(token) {
-
-        return new Promise((resolve, reject) => {
-            jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve({ id: decoded.id, name: decoded.name });
-                }
-            });
-        });
     }
 }
 
